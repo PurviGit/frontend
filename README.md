@@ -1,70 +1,147 @@
-# Getting Started with Create React App
+# 🙏 DSCPL Spiritual AI Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive AI-powered spiritual assistant built with **FastAPI** (backend) and **React + Tailwind CSS** (frontend), designed to support users in their faith journey through chat, devotionals, prayer, meditation, accountability, and curated video content via the SocialVerse API.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🌟 Features
 
-### `npm start`
+- ✝️ **Spiritual Chatbot** – AI-powered assistant to guide users spiritually using OpenAI.
+- 📖 **Daily Devotionals** – Inspirational messages to start your day.
+- 🙏 **Prayer & Meditation Plans** – Personalized content based on user selections.
+- 🧠 **Accountability Tracker** – Log and track spiritual struggles with grace-centered advice.
+- 🎥 **Curated Videos** – Fetched from SocialVerse API (requires login).
+- 👤 **User Authentication** – Secure login using JWT tokens.
+- 🔔 **Reminders & Progress** – Daily spiritual encouragement and tracked activity.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📁 Folder Structure
 
-### `npm test`
+dscpl-spiritual-assistant/
+├── backend/
+│ ├── main.py
+│ ├── models.py
+│ ├── database.py
+│ ├── crud.py
+│ ├── schemas.py
+│ └── routers/
+│ ├── chat.py
+│ ├── user.py
+│ ├── content.py
+│ └── progress.py
+├── frontend/
+│ ├── src/
+│ │ ├── App.jsx
+│ │ ├── index.css
+│ │ ├── pages/
+│ │ │ ├── Chat.jsx
+│ │ │ ├── Devotion.jsx
+│ │ │ ├── Meditation.jsx
+│ │ │ ├── Prayer.jsx
+│ │ │ ├── Settings.jsx
+│ │ │ └── Videos.jsx
+│ │ └── components/
+│ │ ├── Header.jsx
+│ │ ├── Footer.jsx
+│ │ └── Sidebar.jsx
+│ ├── tailwind.config.js
+│ ├── postcss.config.js
+│ └── package.json
+└── README.md
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ✅ Backend Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Create and activate a virtual environment:**
 
-### `npm run eject`
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Install dependencies:
+pip install -r requirements.txt
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Initialize the database:
+python create_chat_table.py
+python seed_progress.py  # optional
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Run FastAPI server:
 
-## Learn More
+bash
+Copy
+Edit
+uvicorn main:app --reload
+Server runs at: http://localhost:8000
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+✅ Frontend Setup
+Install Node modules:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+bash
+Copy
+Edit
+cd frontend
+npm install
+Run development server:
 
-### Code Splitting
+bash
+Copy
+Edit
+npm start
+Frontend runs at: http://localhost:3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+🔑 Authentication
+Use the /login endpoint to authenticate users and receive a JWT token.
 
-### Analyzing the Bundle Size
+The frontend stores the token in localStorage.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+All protected routes (e.g., /videos) require a valid token in the Authorization header.
 
-### Making a Progressive Web App
+📡 External API (SocialVerse)
+Endpoint: https://api.socialverseapp.com/posts/summary/get
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Header Required:
 
-### Advanced Configuration
+http
+Copy
+Edit
+Flic-Token: flic_b1c6b09d98e2d4884f61b9b3131dbb27a6af84788e4a25db067a22008ea9cce5
+This is included automatically in /videos route after login.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+✨ Enhancements Planned
+✅ Load chat history from DB
 
-### Deployment
+✅ OpenAI responses
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+✅ Devotional tracking per day
 
-### `npm run build` fails to minify
+🔄 Calendar sync for reminders
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🔔 Push notifications
+
+👥 Invite friends / community
+
+🧠 Technologies Used
+Frontend: React, Tailwind CSS, Axios, React Router
+
+Backend: FastAPI, SQLAlchemy, SQLite, JWT Auth, Pydantic
+
+AI Integration: OpenAI GPT
+
+External API: SocialVerse
+
+🙌 Credits
+Spiritual Assistant AI powered by OpenAI
+
+Video content from SocialVerse
+
+Inspired by the DSCPL Program
+
+
